@@ -15,7 +15,7 @@
 					<Add option="-g" />
 				</Compiler>
 				<Linker>
-					<Add library="allegro-5.0.10-mingw-4.7.0/lib/liballegro-5.0.10-monolith-static-mt-debug.a" />
+					<Add library="allegro-5.0.10-mingw-4.7.0/lib/liballegro-5.0.10-monolith-mt-debug.a" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -36,6 +36,9 @@
 			<Add option="-Wall" />
 			<Add directory="allegro-5.0.10-mingw-4.7.0/include" />
 		</Compiler>
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

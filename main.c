@@ -24,6 +24,7 @@ int main (){
   al_set_display_icon(display, icon);// Icone
   ALLEGRO_BITMAP * sprite1 = al_load_bitmap("./dragon.png"); // sprite dragon
   ALLEGRO_BITMAP * sprite2 = al_load_bitmap("./dark_knight.png"); // sprite dragon
+  ALLEGRO_BITMAP * sprite3 = al_load_bitmap("./blue_dragon.png"); // sprite dragon
   ALLEGRO_BITMAP * bg = al_load_bitmap("./bg.gif");// background (nao funciona gif, ele fica estatico)
 
   ALLEGRO_EVENT_QUEUE * event_queue = al_create_event_queue();
@@ -35,9 +36,10 @@ int main (){
   float frame = 0.f;
   int pos_x1 = 0, pos_y1 = 0;
   int current_frame_y1 = 161;
-
   int pos_x2 = 0, pos_y2 = 0;
   float current_frame_y2 = 62.5;
+  int pos_x3 = 0, pos_y3 = 0;
+  float current_frame_y3 = 128;
 
   // definicoes de frames para animar sprites
 
@@ -70,6 +72,18 @@ int main (){
     }else if( event.keyboard.keycode == ALLEGRO_KEY_W ){
       current_frame_y2 = 0;
       pos_y2 -= 20;
+    }else if( event.keyboard.keycode == ALLEGRO_KEY_K ){
+      current_frame_y3 = 128;
+      pos_x3 += 20;
+    }else if( event.keyboard.keycode == ALLEGRO_KEY_H ){
+      current_frame_y3 = 128 * 3;
+      pos_x3 -= 20;
+    }else if( event.keyboard.keycode == ALLEGRO_KEY_J ){
+      current_frame_y3 = 128 * 2;
+      pos_y3 += 20;
+    }else if( event.keyboard.keycode == ALLEGRO_KEY_U ){
+      current_frame_y3 = 0;
+      pos_y3 -= 20;
     }
     // logica para movimentar o sprite atraves das setas
 
@@ -84,11 +98,13 @@ int main (){
     al_draw_bitmap(bg, 0, 0, 0); // jogar bg(background) na tela
     al_draw_bitmap_region(sprite1, 191 * (int)frame, current_frame_y1, 191, 161, pos_x1, pos_y1, 0); // jogar o sprite do dragao e mudar as iamgens "animando" ele
     al_draw_bitmap_region(sprite2, 47 * (int)frame, current_frame_y2, 47, 62.5, pos_x2, pos_y2, 0); // jogar o sprite do dragao e mudar as iamgens "animando" ele
+    al_draw_bitmap_region(sprite3, 144 * (int)frame, current_frame_y3, 144, 128, pos_x3, pos_y3, 0); // jogar o sprite do dragao e mudar as iamgens "animando" ele
     al_flip_display();
   }
   al_destroy_bitmap(bg);
   al_destroy_bitmap(sprite1);
   al_destroy_bitmap(sprite2);
+  al_destroy_bitmap(sprite3);
   al_destroy_font(font);
   al_destroy_display(display);
   al_destroy_event_queue(event_queue);
