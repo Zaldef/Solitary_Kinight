@@ -22,7 +22,7 @@ int main (){
 
   ALLEGRO_BITMAP *icon = al_load_bitmap("knight_ico.png"); // Icone
   al_set_display_icon(display, icon);// Icone
-  ALLEGRO_BITMAP * sprite = al_load_bitmap("./dragon.png"); // sprite dragon
+  ALLEGRO_BITMAP * sprite = al_load_bitmap("./blue_dragon.png"); // sprite dragon
   ALLEGRO_BITMAP * bg = al_load_bitmap("./bg.gif");// background (nao funciona gif, ele fica estatico)
 
   ALLEGRO_EVENT_QUEUE * event_queue = al_create_event_queue();
