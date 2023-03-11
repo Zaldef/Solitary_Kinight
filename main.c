@@ -22,7 +22,8 @@ int main (){
 
   ALLEGRO_BITMAP *icon = al_load_bitmap("knight_ico.png"); // Icone
   al_set_display_icon(display, icon);// Icone
-  ALLEGRO_BITMAP * sprite = al_load_bitmap("./blue_dragon.png"); // sprite dragon
+  ALLEGRO_BITMAP * sprite1 = al_load_bitmap("./dragon.png"); // sprite dragon
+  ALLEGRO_BITMAP * sprite2 = al_load_bitmap("./dark_knight.png"); // sprite dragon
   ALLEGRO_BITMAP * bg = al_load_bitmap("./bg.gif");// background (nao funciona gif, ele fica estatico)
 
   ALLEGRO_EVENT_QUEUE * event_queue = al_create_event_queue();
@@ -32,9 +33,13 @@ int main (){
   al_start_timer(timer);
 
   float frame = 0.f;
-  int pos_x = 0, pos_y = 0;
-  int current_frame_y = 161;
-// definicoes de frames para animar sprites
+  int pos_x1 = 0, pos_y1 = 0;
+  int current_frame_y1 = 161;
+
+  int pos_x2 = 0, pos_y2 = 0;
+  float current_frame_y2 = 62.5;
+
+  // definicoes de frames para animar sprites
 
   while(true){
     ALLEGRO_EVENT event;
@@ -42,17 +47,29 @@ int main (){
     if( event.type == ALLEGRO_EVENT_DISPLAY_CLOSE ){
       break;
     }else if( event.keyboard.keycode == ALLEGRO_KEY_RIGHT ){
-      current_frame_y = 161;
-      pos_x += 20;
+      current_frame_y1 = 161;
+      pos_x1 += 20;
     }else if( event.keyboard.keycode == ALLEGRO_KEY_LEFT ){
-      current_frame_y = 161 * 3;
-      pos_x -= 20;
+      current_frame_y1 = 161 * 3;
+      pos_x1 -= 20;
     }else if( event.keyboard.keycode == ALLEGRO_KEY_DOWN ){
-      current_frame_y = 161 * 2;
-      pos_y += 20;
+      current_frame_y1 = 161 * 2;
+      pos_y1 += 20;
     }else if( event.keyboard.keycode == ALLEGRO_KEY_UP ){
-      current_frame_y = 0;
-      pos_y -= 20;
+      current_frame_y1 = 0;
+      pos_y1 -= 20;
+    }else if( event.keyboard.keycode == ALLEGRO_KEY_D ){
+      current_frame_y2 = 62.5;
+      pos_x2 += 20;
+    }else if( event.keyboard.keycode == ALLEGRO_KEY_A ){
+      current_frame_y2 = 62.5 * 3;
+      pos_x2 -= 20;
+    }else if( event.keyboard.keycode == ALLEGRO_KEY_S ){
+      current_frame_y2 = 62.5 * 2;
+      pos_y2 += 20;
+    }else if( event.keyboard.keycode == ALLEGRO_KEY_W ){
+      current_frame_y2 = 0;
+      pos_y2 -= 20;
     }
     // logica para movimentar o sprite atraves das setas
 
@@ -65,11 +82,13 @@ int main (){
 
     al_clear_to_color(al_map_rgb(255,255,255));// Cor da tela, nao visivel pois o background cobre ela inteira
     al_draw_bitmap(bg, 0, 0, 0); // jogar bg(background) na tela
-    al_draw_bitmap_region(sprite, 191 * (int)frame, current_frame_y, 191, 161, pos_x, pos_y, 0); // jogar o sprite do dragao e mudar as iamgens "animando" ele
+    al_draw_bitmap_region(sprite1, 191 * (int)frame, current_frame_y1, 191, 161, pos_x1, pos_y1, 0); // jogar o sprite do dragao e mudar as iamgens "animando" ele
+    al_draw_bitmap_region(sprite2, 47 * (int)frame, current_frame_y2, 47, 62.5, pos_x2, pos_y2, 0); // jogar o sprite do dragao e mudar as iamgens "animando" ele
     al_flip_display();
   }
   al_destroy_bitmap(bg);
-  al_destroy_bitmap(sprite);
+  al_destroy_bitmap(sprite1);
+  al_destroy_bitmap(sprite2);
   al_destroy_font(font);
   al_destroy_display(display);
   al_destroy_event_queue(event_queue);
